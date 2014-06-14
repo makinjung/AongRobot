@@ -1,0 +1,37 @@
+
+*** Settings ***
+Library		Selenium2Library
+Suite Teardown	Close All Browsers
+
+
+*** Variables ***
+
+${URL}    http://www.google.co.th  
+
+*** Testcases ***
+
+Search from Google
+	[Template]    Search Work Flow
+	#------------+-------------#
+	#  Keyword   | ShowRult    #
+	#------------+-------------#
+
+		Robot      Robot
+		RobotMe    RobotMe
+
+*** Keywords ***
+Search Work Flow
+	[Arguments]	${keyword}    ${ShowResult}
+	Special search    ${keyword}
+	Show Result Search    ${ShowResult}
+
+
+Special search 
+	[Arguments]    ${keyword}
+	Open Browser   ${URL}
+	Input Text    gbqfq    ${keyword}
+	Click Button    gbqfb
+
+Show Result Search
+	[Arguments]	${ShowResult}
+	Wait until page contains    ${ShowResult}
